@@ -146,9 +146,9 @@ class Resource(models.Resource):
                           help_text='[{0}]Server address.'.format('irc'))
     nickname = models.Field(required=False, display=False,
                             help_text='[{0}]The irc nick.'.format('irc'))
-    target = models.Field(required=False, display=False,
-                          help_text='[{0}]The distination channels or users.'
-                          .format('irc'))
+    targets = models.Field(required=False, display=False,
+                           help_text='[{0}]The distination channels or users.'
+                           .format('irc'))
 
     def _separate(self, kwargs):
         """Remove None-valued and configuration-related keyworded arguments
@@ -188,7 +188,7 @@ class Resource(models.Resource):
                     nc[field] = config_item[field]
         else:
             kwargs['notification_configuration'] = \
-                    config_item['notification_configuration']
+                config_item['notification_configuration']
 
     @resources.command
     @click.option('--job-template', type=types.Related('job_template'),
